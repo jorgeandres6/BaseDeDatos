@@ -11,7 +11,7 @@ router.get('/',function(req,res){
   res.sendFile('index.html',{root:'../client'});
 });
 
-router.post('/login',function(req,res){
+router.post('/schedule/login',function(req,res){
   var user=req.body.user,
   psw=req.body.pass;
   bdd.autentificacion(user,psw).then((result) => {
@@ -19,5 +19,29 @@ router.post('/login',function(req,res){
   });
 });
 
+router.post('/events/new',function(req,res){
+  let usuario=req.body.usuario,
+      titulo=req.body.title,
+      fInicio=req.body.start,
+      fFin=req.body.end;
+  bdd.guardarEvento (usuario, titulo, fInicio, fFin);
+  res.send("Evento "+titulo+", almacenado exitosamente!");
+});
 
-module.exports = router
+router.post('/schedule/newuser',function(req,res){
+  let nombre=req.body.user_names,
+      psw=req.body.user_pword,
+      fNac=req.body.user_dbirt,
+      correo=req.body.user_email;
+  bdd.nuevoUsuario(nombre, psw, fNac, correo);
+  res.send("Usuario ingresado exitosamente");
+});
+
+router.post('/events/all',function(req,res){
+  let nombre=req.body.nombre;
+  bdd.poblarCalendario(nombre).then((result) => {
+    res.send(result);
+  });
+});
+
+module.exports = router;

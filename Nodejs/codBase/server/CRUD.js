@@ -3,6 +3,8 @@ module.exports.ingresarUno = (db,callback) => {
 
   coleccion.insertOne({
     nombre: "UsuarioBeta",
+    correo: "usuario@beta.com",
+    fNacimiento: "1991-03-21",
     password : "1234abc."
   }, (e,res) => {
     if(e) console.log(e);
