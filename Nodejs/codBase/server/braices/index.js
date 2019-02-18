@@ -44,4 +44,10 @@ router.post('/events/all',function(req,res){
   });
 });
 
+router.post('/events/delete',function(req,res){
+  let id=req.body._id,
+      resultado=bdd.eliminarEvento(id);
+  res.send(resultado);
+});
+
 module.exports = router;

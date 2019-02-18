@@ -41,4 +41,11 @@ async function poblarCalendario (mod, nombre){
   return (resultado);
 };
 
-module.exports = {autentificacion, guardarEvento, nuevoUsuario, poblarCalendario};
+function eliminarEvento (mod,id){
+  mod.deleteOne({_id:id},(e)=>{
+    if (e) console.log(e);
+  });
+  return ("Evento eliminado exitosamente!");
+}
+
+module.exports = {autentificacion, guardarEvento, nuevoUsuario, poblarCalendario, eliminarEvento};

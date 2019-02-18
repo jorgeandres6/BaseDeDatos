@@ -38,4 +38,9 @@ async function autentificacion (user, psw) {
     return resultado;
   };
 
-module.exports = {autentificacion, guardarEvento, nuevoUsuario, poblarCalendario};
+  function eliminarEvento (id){
+    let resultado=operaciones.eliminarEvento (mEventos,id);
+    return (resultado);
+  };
+
+module.exports = {autentificacion, guardarEvento, nuevoUsuario, poblarCalendario, eliminarEvento};

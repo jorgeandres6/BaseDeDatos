@@ -13,17 +13,17 @@ class EventManager {
         let ev={nombre:nombre}
         $.post(url,ev,(response) => {
             //this.inicializarCalendario(response)
-            console.log("----------------respuesta Di------------------"+response);
             $('.calendario').fullCalendar('renderEvents', response);
         })
     }
 
     eliminarEvento(evento) {
-        let eventId = evento.id
-        $.post('/events/delete/' + eventId, {
-            id: eventId
+        let eventId = evento._id;
+        console.log(eventId);
+        $.post('/events/delete', {
+            _id: eventId
         }, (response) => {
-            alert(response)
+            alert(response);
         })
     }
 
@@ -125,7 +125,7 @@ class EventManager {
                 if (jsEvent.pageX >= x1 && jsEvent.pageX <= x2 &&
                     jsEvent.pageY >= y1 && jsEvent.pageY <= y2) {
                     this.eliminarEvento(event)
-                    $('.calendario').fullCalendar('removeEvents', event.id);
+                    $('.calendario').fullCalendar('removeEvents', event._id);
                 }
             }
         })
