@@ -43,4 +43,8 @@ async function autentificacion (user, psw) {
     return (resultado);
   };
 
-module.exports = {autentificacion, guardarEvento, nuevoUsuario, poblarCalendario, eliminarEvento};
+  function actualizarEvento (id,newStart,newEnd){
+    operaciones.actualizarEvento(mEventos,id,newStart,newEnd);
+  };
+
+module.exports = {autentificacion, guardarEvento, nuevoUsuario, poblarCalendario, eliminarEvento, actualizarEvento};

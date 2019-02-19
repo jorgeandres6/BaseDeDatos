@@ -48,4 +48,14 @@ function eliminarEvento (mod,id){
   return ("Evento eliminado exitosamente!");
 }
 
-module.exports = {autentificacion, guardarEvento, nuevoUsuario, poblarCalendario, eliminarEvento};
+function actualizarEvento (mod,id,newStart,newEnd){
+  console.log("i--------------------"+id);
+  console.log("s--------------------"+newStart);
+  console.log("e--------------------"+newEnd);
+  mod.findByIdAndUpdate(id,{start:newStart,end:newEnd},(e,d)=>{
+    console.log(d);
+  });
+  //mod.updateOne({_id:id});
+}
+
+module.exports = {autentificacion, guardarEvento, nuevoUsuario, poblarCalendario, eliminarEvento, actualizarEvento};

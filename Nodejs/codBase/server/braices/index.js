@@ -50,4 +50,11 @@ router.post('/events/delete',function(req,res){
   res.send(resultado);
 });
 
+router.post('/events/update',function(req,res){
+  let id=req.body._id,
+      newStart=req.body.newStart,
+      newEnd=req.body.newEnd;
+  bdd.actualizarEvento (id,newStart,newEnd);
+});
+
 module.exports = router;

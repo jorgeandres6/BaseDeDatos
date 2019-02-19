@@ -4,6 +4,7 @@ class EventManager {
         this.obtenerDataInicial()
         this.inicializarFormulario()
         this.guardarEvento()
+        this.cerrarSesion()
     }
 
     obtenerDataInicial() {
@@ -19,7 +20,6 @@ class EventManager {
 
     eliminarEvento(evento) {
         let eventId = evento._id;
-        console.log(eventId);
         $.post('/events/delete', {
             _id: eventId
         }, (response) => {
@@ -93,6 +93,21 @@ class EventManager {
         })
     }
 
+    actualizarEvento(event){
+      let nuevaFecha=event.start.format();
+      let nuevoFin="";
+      if(event.end!=null){
+        nuevoFin=event.end.format();
+      };
+      let ev={
+        _id: event._id,
+        newStart: nuevaFecha,
+        newEnd: nuevoFin
+      }
+      console.log(ev);
+      $.post('/events/update',ev);
+    }
+
     inicializarCalendario(eventos) {
         $('.calendario').fullCalendar({
             header: {
@@ -108,7 +123,8 @@ class EventManager {
             dragRevertDuration: 0,
             timeFormat: 'H:mm',
             eventDrop: (event) => {
-                this.actualizarEvento(event)
+              console.log(event);
+              this.actualizarEvento(event);
             },
             events: eventos,
             eventDragStart: (event, jsEvent) => {
@@ -131,14 +147,12 @@ class EventManager {
         })
     }
 
-    hacerEvento(){
-      let ev = {
-          title: "Ejemplo",
-          start: "2019-02-16",
-          end: "2019-02-17"
-      }
-      $('.calendario').fullCalendar('renderEvent', ev)
-      console.log("Si")
+    cerrarSesion(){
+      $('.logout-container').on('click', (ev) => {
+        ev.preventDefault();
+        sessionStorage.clear();
+        window.location.href = "index.html";
+      });
     }
 }
 
