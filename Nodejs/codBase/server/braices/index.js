@@ -1,17 +1,16 @@
+//Router para las peticiones HTTP
+
 var express = require ('express'),
     router = express.Router(),
     path = require ('path'),
     bdd = require ('../mongoose/index.js');
 
-    /*bdd.autentificacion("UsuarioBeta","1234abc.").then((result) => {
-        console.log("Final "+result);
-    });*/
 
-router.get('/',function(req,res){
+router.get('/',function(req,res){ //Pagina inicial
   res.sendFile('index.html',{root:'../client'});
 });
 
-router.post('/schedule/login',function(req,res){
+router.post('/schedule/login',function(req,res){ //Login
   var user=req.body.user,
   psw=req.body.pass;
   bdd.autentificacion(user,psw).then((result) => {
@@ -19,7 +18,7 @@ router.post('/schedule/login',function(req,res){
   });
 });
 
-router.post('/events/new',function(req,res){
+router.post('/events/new',function(req,res){ //Nuevo evento
   let usuario=req.body.usuario,
       titulo=req.body.title,
       fInicio=req.body.start,
@@ -28,7 +27,7 @@ router.post('/events/new',function(req,res){
   res.send("Evento "+titulo+", almacenado exitosamente!");
 });
 
-router.post('/schedule/newuser',function(req,res){
+router.post('/schedule/newuser',function(req,res){ //Nuevo Usuario
   let nombre=req.body.user_names,
       psw=req.body.user_pword,
       fNac=req.body.user_dbirt,
@@ -37,20 +36,20 @@ router.post('/schedule/newuser',function(req,res){
   res.send("Usuario ingresado exitosamente");
 });
 
-router.post('/events/all',function(req,res){
+router.post('/events/all',function(req,res){ //Devolver todos los eventos del usuario
   let nombre=req.body.nombre;
   bdd.poblarCalendario(nombre).then((result) => {
     res.send(result);
   });
 });
 
-router.post('/events/delete',function(req,res){
+router.post('/events/delete',function(req,res){ //Borrar evento
   let id=req.body._id,
       resultado=bdd.eliminarEvento(id);
   res.send(resultado);
 });
 
-router.post('/events/update',function(req,res){
+router.post('/events/update',function(req,res){ //Actualizar un evento
   let id=req.body._id,
       newStart=req.body.newStart,
       newEnd=req.body.newEnd;

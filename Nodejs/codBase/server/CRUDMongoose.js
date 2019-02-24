@@ -1,3 +1,4 @@
+//Registro de un nuevo usuario en la base de datos
 module.exports = {
   autentificacion : async function (mod,nom,psw) {
     let mensaje = "";
@@ -7,7 +8,6 @@ module.exports = {
         };
         console.log("adentro");
         mensaje =(c>0) ? "Validado" : "No validado";
-        //(c>0) ? "Validado" : "No validado";
       });
     mensaje = "Validado";
     return (mensaje);

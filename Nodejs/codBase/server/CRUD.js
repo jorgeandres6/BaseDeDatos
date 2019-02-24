@@ -1,3 +1,5 @@
+//Ingereso de 1 usuario a traves de la ejecucion de este script en consola
+
 module.exports.ingresarUno = (db,callback) => {
   let coleccion = db.collection("usuarios");
 

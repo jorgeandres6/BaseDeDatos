@@ -1,3 +1,5 @@
+//Ingreso de un usuario nuevo
+
 let MongoClient = require('mongoDB').MongoClient,
     url = "mongoDB://localhost/calendario",
     operaciones = require ('./CRUD.js');
